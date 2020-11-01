@@ -1,0 +1,14 @@
+<!-- {% extends 'base.html' %} -->
+
+<!-- {% block content %} -->
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<!-- <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div> -->
+
+<Form method='POST'>
+{% csrf_token %}
+{{ form }}
+{{ object.name }}
+<button type='submit'>Delete</button>
+</Form>
+<!-- {% endblock %} -->
