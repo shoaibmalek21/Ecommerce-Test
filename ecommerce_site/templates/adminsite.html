@@ -16,56 +16,22 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
   <span class="w3-bar-item w3-right">Admin Site</span>
+ <!--  {% if user.is_authenticated.active %}
+    <li><a href="{% url 'logout' %}"></i> Logout</a></li>
+  {% else %}
+    <li><a href="{% url 'login' %}"></i> Login</a></li>
+  {% endif %}
+ -->
+    <a href="{% url 'adminsite' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Products</a>
 
-
-    <a href="{% url 'product-create' %}" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Add Product</a>
-
+    <a href="{% url 'product-create' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Add Product</a>
+    
 </div>
 
 </nav>
 
-
-    <a href="" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i></a>
-
-        <div class="card mb-3">
-            <fieldset class='form-group' align='center'>
-              <legend class='border-bottom mb-2'>
-                  <h3 align='center'>List of Products</h3>
-              </legend>                    
-            </fieldset>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Product Name</th>
-                        <th>Image</th>
-                        <th>Price</th>
-                        <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                        {% for product in products %}
-                          <tr>
-                              <th>{{ product.id }}</th>
-                              <th>{{ product.name }}</th>
-                              <th>{{ product.image }}</th>
-                              <th>{{ product.price }}</th>
-                              <th><a href="{% url 'product-detail' product.id %}">Update</a>
-                              <a href="">Delete</a></th>
-                          </tr>
-                        {% empty %}
-                          <p align='center'>No Product</p>
-                        {% endfor %}
-
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-
+{% block content %}
+{% endblock %}
 
 
 <!-- Overlay effect when opening sidebar on small screens -->

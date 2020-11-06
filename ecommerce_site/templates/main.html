@@ -23,6 +23,48 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'base/images/ico/apple-touch-icon-114-precomposed.png' %}">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'base/images/ico/apple-touch-icon-72-precomposed.png' %}">
     <link rel="apple-touch-icon-precomposed" href="{% static 'base/images/ico/apple-touch-icon-57-precomposed.png' %}">
+    <script type='text/javascript'>
+		var user = '{{request.user}}'
+
+		function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken');
+		
+		function getCookie(name) {
+		    var cookieArr = document.cookie.split(';');
+
+		        for (var i = 0; i < cookieArr.length; i++) {
+		            var cookiePair = cookieArr[i].split('=');
+
+		            if (name == cookiePair[0].trim()) {
+		               	return decodeURIComponent(cookiePair[1]);
+		        	}
+		    	}
+		    	return null;
+		}
+		var cart = JSON.parse(getCookie('cart'));
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart was created')
+			document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/'
+		}
+
+		console.log('Cart:',cart)		
+
+	</script>
 </head><!--/head-->
 
 <body>
@@ -90,7 +132,7 @@
 							<ul class="nav navbar-nav">
 								<li><a href=""><i class="fa fa-user"></i> Account</a></li>
 								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="{% url 'checkout' %}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								{% if user.is_authenticated %}
 									<li><a href="{% url 'logout' %}"><i class="fa fa-unlock"></i> 	Logout</a></li>
@@ -125,7 +167,7 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="address">
-							<img src="images/home/map.png" alt="" />
+							<img src="{% static 'base/images/home/map.png' %}" alt="" />
 							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
 						</div>
 					</div>
@@ -201,10 +243,11 @@
 
   
     <script src="{% static 'base/js/jquery.js' %}"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
+	<script src="{% static 'base/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'base/js/jquery.scrollUp.min.js' %}"></script>
+	<script src="{% static 'base/js/price-range.js' %}"></script>
+    <script src="{% static 'base/js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'base/js/main.js' %}"></script>
+    <script src="{% static 'js/cart.js' %}"></script>
 </body>
 </html>

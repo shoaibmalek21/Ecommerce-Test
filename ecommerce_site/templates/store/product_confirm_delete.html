@@ -1,14 +1,38 @@
-<!-- {% extends 'base.html' %} -->
+{% extends 'adminsite.html' %}
+{% load static %}
 
-<!-- {% block content %} -->
+{% load crispy_forms_tags %}
+{% block content %}
 
-<!-- Overlay effect when opening sidebar on small screens -->
-<!-- <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div> -->
+ <a href="" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i></a>
 
-<Form method='POST'>
-{% csrf_token %}
-{{ form }}
-{{ object.name }}
-<button type='submit'>Delete</button>
-</Form>
-<!-- {% endblock %} -->
+        <div class="card mb-3">
+            <fieldset class='form-group' align='center'>
+              <legend class='border-bottom mb-2'>
+              </legend>                    
+            </fieldset>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+
+						<Form method='POST'>
+						{% csrf_token %}
+						{{ form }}
+						<fieldset class='form-group'>
+							<legend class='border-bottom mb-4'>Delete Product</legend>
+							<h4>Are you sure you want to delete the product "{{ object.name }}" ?</h4>
+						</fieldset>
+						<div class='form-group'>
+							<button class="btn btn-outline-danger" type='submit'>Yes, Delete</button>
+						</div>
+
+						</Form>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+{% endblock %}

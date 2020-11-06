@@ -12,6 +12,7 @@ urlpatterns = [
     path('add/', ProductCreateView.as_view(), name='product-create'),
 
 	path('cart/', views.cart, name='cart'),
-	# path('checkout/', views.checkout, name='checkout'),		
-	# path('process_oder/', views.processOrder, name='process_order')
-]	
+	path('checkout/', views.checkout, name='checkout'),
+	path('update_item/', views.updateItem, name='update_item'),
+	path('process_oder/', views.processOrder, name='process_order')
+]
