@@ -20,6 +20,7 @@
                         <th>#</th>
                         <th>Product Name</th>
                         <th>Image</th>
+                        <th>Category</th>
                         <th>Price</th>
                         <th></th>
                     </tr>
@@ -29,6 +30,7 @@
                               <th>{{ object.id }}</th>
                               <th>{{ object.name }}</th>
                               <th>{{ object.image }}</th>
+                              <th>{{ object.category }}</th>
                               <th>{{ object.price }}</th>
                               <th><a href="{% url 'product-update' object.id %}">Update</a>
                               <a href="{% url 'product-delete' object.id %}">Delete</a></th>

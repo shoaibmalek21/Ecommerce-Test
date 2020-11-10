@@ -24,4 +24,19 @@ def RegistrationView(request):
 @csrf_protect
 class LoginView(View):
 	def get(self, request):
+
 		return render(request,'auth/login.html')
+
+@csrf_protect
+def Customer(request):
+
+	if request.method == 'POST':
+		form = request.POST
+
+		if form.is_valid():
+			form.save()
+			# username = form.cleaned_data['']
+			messages.success(request,f'Account Create.')
+			return redirect('login')
+	return render(request,'auth/customer.html',{'form':form})
+

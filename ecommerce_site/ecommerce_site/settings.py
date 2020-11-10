@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'store',
     'user',
+    'adminsite',
 ]
 
 MIDDLEWARE = [

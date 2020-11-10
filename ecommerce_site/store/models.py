@@ -11,19 +11,27 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
 	name = models.CharField(max_length=200, null=True)
-	category = models.OneToOneField(Category,on_delete=models.CASCADE,primary_key=True)
+	category = models.ForeignKey(Category,on_delete=models.CASCADE,primary_key=True)
 
 
 	def __str__(self):
 		return '%s' % (self.name)
 
 class Product(models.Model):
-	# SEL_ID = models.IntegerField()
-	# PRO_ID = models.IntegerField()
+	# SEL_ID = models.AutoField(db_column='SEL_ID',primary_key=True)
+	PRO_ID = models.IntegerField(null=True)
 	name = models.CharField(max_length=200, null=True)
-	# category = models.ForeignKey(SubCategory,on_delete=models.CASCADE)
+	# sub_category = models.OneToOneField(Category,on_delete=models.CASCADE,primary_key=True)
+	category = models.ForeignKey(SubCategory, related_name='product', on_delete=models.CASCADE, blank=True, null=True)
+	# subcategory = models.ForeignKey(SubCategory, related_name='category', on_delete=models.CASCADE, blank=True, null=True)
+	# subcategory = GenericForeignKey(SubCategory, category)
+	# subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, blank=True, null=True)
+
+	# sub_category = models.OneToOneField(SubCategory,on_delete=models.CASCADE)
 	image = models.ImageField(null=True, blank=True)
 	price = models.FloatField()
+	# category = models.OneToOneField(Category,on_delete = models.CASCADE) 
+
 	# category = models.OneToOneField(Category,on_delete=models.CASCADE)
 	# subcategory = models.OneToOneField(SubCategory,on_delete=models.CASCADE)
 
@@ -96,8 +104,6 @@ class OrderItem(models.Model):
 	def get_total(self):
 		total = self.product.price * self.quantity
 		return total
-	
-
 	
 
 class ShippingAddress(models.Model):

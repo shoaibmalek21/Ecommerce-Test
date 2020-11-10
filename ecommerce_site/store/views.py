@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import View, CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import View, CreateView, ListView
 from . models import *
 from . utils import cookieCart, cartData, guestOrder
 from django.http import JsonResponse
@@ -30,23 +30,6 @@ class ProductListView(ListView):
 	template_name = 'index.html'
 	context_object_name = 'queryset'
 	ordering = ['-name']
-
-class ProductDetailView(DetailView):
-	model = Product
-
-class ProductCreateView(CreateView):
-	model = Product
-	fields = ['name','image','price']
-
-
-class ProductUpdateView(UpdateView):
-	model = Product
-	fields = ['name','image','price']
-
-
-class ProductDeleteView(DeleteView):
-	model = Product
-	success_url = '/adminsite'
 
 def store(request):
 
@@ -147,20 +130,6 @@ def updateItem(request):
 
 	return JsonResponse('Item was added', safe=False)
 
-
-class AdminSite(View):
-	def get(self,request):
-		context = {
-			products : Product.objects.all()
-		}
-		return render(request, 'adminsite.html',context)
-
-
-class AdminProductListView(ListView):
-	model = Product
-	template_name = 'store/product_list_ad.html'
-	context_object_name = 'products'
-	ordering = ['-name']
 
 def processOrder(request):
 	transaction_id = datetime.datetime.now().timestamp()

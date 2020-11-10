@@ -18,10 +18,14 @@
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="/" class="active">Home</a></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
+	                	            
+									{% for product in queryset %}
+										<ul role="menu" class="sub-menu">
+                                        	<li><a href="">{{ product.category }}</a></li>
                                         <!-- <li><a href="{% url 'product-create' %}">Add Products</a></li> -->
 										<!-- <li><a href="">Product Details</a></li>  --> 
-                                    </ul>
+		                            	</ul>	
+									{% endfor %}
                                 </li> 
 							</ul>
 						</div>

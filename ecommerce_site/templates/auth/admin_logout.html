@@ -1,0 +1,9 @@
+{% extends 'adminsite.html'%}
+{% block content %}
+	<h4>You have been logged out</h4>
+	<div class='border-top	pt-3'>
+			<small class="text-muted">
+				<a href="{% url 'admin_login' %}">Login In Again</a>
+			</small>
+	</div>
+{% endblock content %}
